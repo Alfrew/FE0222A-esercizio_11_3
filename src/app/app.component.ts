@@ -1,4 +1,3 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { Foto } from "./interfaces/foto";
 import { FotoService } from "./services/foto.service";
@@ -30,7 +29,7 @@ export class AppComponent {
   likeds: Foto[] = [];
   error: string | undefined;
 
-  constructor(private http: HttpClient, private photosSrv: FotoService) {}
+  constructor(private photosSrv: FotoService) {}
 
   ngOnInit(): void {
     this.fetchPhotos();
@@ -38,10 +37,10 @@ export class AppComponent {
   fetchPhotos() {
     // this.isLoading = true;
     this.photosSrv.fetchPhotos().subscribe(
-      (ris) => {
+      (resp) => {
         // this.isLoading = false;
-        this.photos = ris.filter((photo) => photo.id < 200); // just to print less images, my PC was exploding with 5000 element
-        console.log(ris);
+        this.photos = resp.filter((photo) => photo.id < 200); // just to print less images, my PC was exploding with 5000 element
+        console.log(resp);
       },
       (error) => {
         // this.isLoading = false;
@@ -51,7 +50,7 @@ export class AppComponent {
     );
   }
   delPhoto(id: number) {
-    this.photosSrv.deletePhoto(id).subscribe((ris) => {
+    this.photosSrv.deletePhoto(id).subscribe(() => {
       this.photos = this.photos.filter((photo) => photo.id != id);
       this.likeds = this.likeds.filter((liked) => liked.id != id);
     });
