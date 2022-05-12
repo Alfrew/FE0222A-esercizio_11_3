@@ -12,7 +12,7 @@ export class FotoService {
 
   constructor(private http: HttpClient) {}
 
-  fetchPhotos() {
+  getPhotos() {
     return this.http.get<Foto[]>("https://jsonplaceholder.typicode.com/photos").pipe(
       // error management
       catchError((err) => {

@@ -36,7 +36,7 @@ export class AppComponent {
   }
   fetchPhotos() {
     // this.isLoading = true;
-    this.photosSrv.fetchPhotos().subscribe(
+    this.photosSrv.getPhotos().subscribe(
       (resp) => {
         // this.isLoading = false;
         this.photos = resp.filter((photo) => photo.id < 200); // just to print less images, my PC was exploding with 5000 element
